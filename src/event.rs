@@ -80,7 +80,6 @@ impl Event {
     /// without doing anything. Once the event is sent, it becomes immutable.
     pub fn send<T: Sender>(&mut self, client: &mut client::Client<T>) -> Result<()> {
         if self.should_drop() {
-            info!("dropping event due to sampling");
             return Ok(());
         }
         self.send_presampled(client)
